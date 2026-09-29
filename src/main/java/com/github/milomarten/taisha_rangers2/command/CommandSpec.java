@@ -16,8 +16,7 @@ public abstract class CommandSpec<PARAM> extends AbstractCommandSpec {
 
     @Override
     public Mono<?> run(ChatInputInteractionEvent event) {
-        return Mono.fromCallable(() -> parameterParser.parse(event))
-                .flatMap(params -> Mono.fromCallable(() -> doAction(params)))
+        return Mono.fromCallable(() -> doAction(parameterParser.parse(event)))
                 .flatMap(cr -> cr.respond(event))
                 .then()
                 .onErrorResume(ex -> handleException(event, ex))
