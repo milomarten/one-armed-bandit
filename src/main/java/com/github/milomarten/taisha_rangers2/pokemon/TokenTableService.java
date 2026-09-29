@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.rng.UniformRandomProvider;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Map;
 
 @Service
@@ -20,5 +21,9 @@ public class TokenTableService {
             tt.addRandomlySelected(token, random, randomness);
         });
         return tt;
+    }
+
+    public Collection<String> getTokens() {
+        return randomTokenResolvers.keySet();
     }
 }
